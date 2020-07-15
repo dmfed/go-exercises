@@ -26,9 +26,9 @@ package main
 
 import (
 	"fmt"
-	"strings"
 	"strconv"
-	)
+	"strings"
+)
 
 func Revrot(s string, n int) string {
 	if len(s) == 0 || n > len(s) || n <= 0 {
@@ -40,16 +40,16 @@ func Revrot(s string, n int) string {
 		ints = append(ints, n)
 	}
 	tmp := []string{}
-	for i, cycles := 0, len(ints) / n; cycles > 0; i, cycles = i+n, cycles-1 {
-		if sumCubes(ints[i:i+n]) % 2 == 0 {
-			rev := reverseSlice(ints[i:i+n])
+	for i := 0; i+n <= len(s); i += n {
+		if sumCubes(ints[i:i+n])%2 == 0 {
+			rev := reverseSlice(ints[i : i+n])
 			for _, val := range rev {
 				tmp = append(tmp, strconv.Itoa(val))
 			}
 		} else {
-			rot := rotateSlice(ints[i:i+n])
+			rot := rotateSlice(ints[i : i+n])
 			for _, val := range rot {
-				tmp = append(tmp,  strconv.Itoa(val))
+				tmp = append(tmp, strconv.Itoa(val))
 			}
 		}
 	}
@@ -66,7 +66,7 @@ func sumCubes(s []int) int {
 
 func reverseSlice(s []int) []int {
 	for i, j := 0, len(s)-1; i < len(s)/2; i, j = i+1, j-1 {
-		s[i], s[j] = s[j], s[i] 
+		s[i], s[j] = s[j], s[i]
 	}
 	return s
 }
@@ -79,7 +79,6 @@ func rotateSlice(s []int) []int {
 	s[len(s)-1] = tmp
 	return s
 }
-
 
 func main() {
 	fmt.Println(Revrot("733049910872815764", 5) == "330479108928157")
