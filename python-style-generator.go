@@ -10,7 +10,7 @@ func (f fibchan) Next() int {
 	if ok {
 		return val
 	}
-	return -1
+	return -1 //If we want to return nil the func should return &val (*int in func signature) 
 }
 
 func fibonacchi(limit int) fibchan {
@@ -21,7 +21,7 @@ func fibonacchi(limit int) fibchan {
 			out <- a
 			a, b = b, a+b
 		}
-		close(out)
+		close(out) //This is needed for range func to complete properly
 	}()
 	return out
 }
