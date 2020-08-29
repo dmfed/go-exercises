@@ -8,7 +8,7 @@ type MaxHeap struct {
 
 func NewMaxHeap(arr []int) MaxHeap {
 	var mh MaxHeap
-	mh.nodes = make([]int, 1)
+	mh.nodes = []int{}
 	for _, val := range arr {
 		mh.Insert(val)
 	}
@@ -21,15 +21,15 @@ func (mh *MaxHeap) Insert(n int) {
 }
 
 func (mh *MaxHeap) GetMax() int {
-	return mh.nodes[1]
+	return mh.nodes[0]
 }
 
 func (mh *MaxHeap) ExtractMax() int {
-	n := mh.nodes[1]
-	mh.nodes[1] = mh.nodes[len(mh.nodes)-1]
+	n := mh.nodes[0]
+	mh.nodes[0] = mh.nodes[len(mh.nodes)-1]
 	mh.nodes = mh.nodes[:len(mh.nodes)-1]
 	if len(mh.nodes) > 1 {
-		mh.siftDown(1)
+		mh.siftDown(0)
 	}
 	return n
 }
@@ -54,19 +54,19 @@ func (mh *MaxHeap) siftDown(p int) {
 }
 
 func (mh *MaxHeap) parent(ch int) int {
-	if ch/2 >= 1 {
-		return ch / 2
+	if ch >= 1 {
+		return (ch - 1) / 2
 	}
-	return 1
+	return 0
 }
 
 func (mh *MaxHeap) maxChild(p int) int {
 	ch1, ch2, maxchild := p, p, p
-	if p*2 < len(mh.nodes)-1 {
-		ch1 = p * 2
-	}
 	if p*2+1 < len(mh.nodes)-1 {
-		ch2 = p*2 + 1
+		ch1 = p*2 + 1
+	}
+	if p*2+2 < len(mh.nodes)-1 {
+		ch2 = p*2 + 2
 	}
 	if mh.nodes[ch2] > mh.nodes[ch1] {
 		maxchild = ch2
