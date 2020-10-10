@@ -12,7 +12,7 @@ The value at the square you end up on determines what happens next:
 0 Stay where you are (until next turn)
 +n This is a "ladder". Go forward n places
 -n This is a "snake". Go back n places
-Each snake or ladder will always end on a square with a 0, so you will only go up or 
+Each snake or ladder will always end on a square with a 0, so you will only go up or
 down one at a time.
 
 Rules
@@ -33,9 +33,9 @@ func SnakesAndLadders(board, dice []int) int {
 	for roll := range dice {
 		if newpos := pos + roll + board[pos+roll]; newpos < end {
 			pos = newpos
-		} else if newpos = end {
+		} else if newpos == end {
 			return newpos
-		} 
+		}
 	}
-  	return pos
+	return pos
 }

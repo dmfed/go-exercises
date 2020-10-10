@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"sort"
 	"strings"
-	)
+)
 
 func TwoToOne(s1 string, s2 string) string {
 	set := make(map[string]bool)
@@ -32,7 +32,7 @@ func TwoToOne(s1 string, s2 string) string {
 	for letter := range set {
 		result = append(result, letter)
 	}
-	sort.Slice(result, func(i, j int) bool {return result[i]<result[j]})
+	sort.Slice(result, func(i, j int) bool { return result[i] < result[j] })
 	return strings.Join(result, "")
 }
 

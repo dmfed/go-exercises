@@ -1,7 +1,8 @@
 package main
 
-import ("fmt"
-	)
+import (
+	"fmt"
+)
 
 type fibchan chan int
 
@@ -10,14 +11,14 @@ func (f fibchan) Next() int {
 	if ok {
 		return val
 	}
-	return -1 //If we want to return nil the func should return &val (*int in func signature) 
+	return -1 //If we want to return nil the func should return &val (*int in func signature)
 }
 
 func fibonacchi(limit int) fibchan {
 	a, b := 0, 1
-	out := make(chan int) 
+	out := make(chan int)
 	go func() {
-		for i :=0; i < limit; i++ {
+		for i := 0; i < limit; i++ {
 			out <- a
 			a, b = b, a+b
 		}

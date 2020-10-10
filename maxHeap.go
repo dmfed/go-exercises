@@ -41,7 +41,6 @@ func (mh *MaxHeap) siftUp(i int) {
 		i = p
 		p = mh.parent(i)
 	}
-
 }
 
 func (mh *MaxHeap) siftDown(p int) {
