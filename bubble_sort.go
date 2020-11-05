@@ -94,7 +94,7 @@ func copyArray(in []int) []int {
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
-	// a := []int{11, 2, 1, 7, 3, 4, 6, 7, 8, 9, 10}
+	//a := []int{11, 2, 1, 7, 3, 4, 6, 5, 8, 9, 10} // Example demonstrates efficiency of third impl.
 	a := generateRandomArray(10)
 
 	b := copyArray(a)
