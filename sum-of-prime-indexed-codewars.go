@@ -8,21 +8,20 @@ Good luck!
 
 package main
 
-type primes struct {
-	have []int
-}
+type primes []int
 
 func newPrimes() *primes {
-	return &primes{have: []int{2}}
+	var p primes = []int{2}
+	return &p
 }
 
 func (p *primes) next() int {
-	res := p.have[len(p.have)-1]
+	res := (*p)[len(*p)-1]
 	n := res + 1
 	found := false
 	for !found {
 		found = true
-		for _, num := range p.have {
+		for _, num := range *p {
 			if n%num == 0 {
 				found = false
 				n++
@@ -30,7 +29,7 @@ func (p *primes) next() int {
 			}
 		}
 		if found {
-			p.have = append(p.have, n)
+			*p = append(*p, n)
 		}
 	}
 	return res
