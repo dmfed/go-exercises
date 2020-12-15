@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"time"
+	"sort"
 )
 
 // BubbleSort1 is the most trivial implementation of Bubble Sort
@@ -11,9 +12,10 @@ func BubbleSort1(arr []int) {
 	passes := 0
 	swaps := 0
 	totalsteps := 0
-	for {
+	swapped := true
+	for swapped {
 		passes++
-		swapped := false
+		swapped = false
 		for i := 1; i < len(arr); i++ {
 			totalsteps++
 			if arr[i-1] > arr[i] {
@@ -21,9 +23,6 @@ func BubbleSort1(arr []int) {
 				swaps++
 				swapped = true
 			}
-		}
-		if !swapped {
-			break
 		}
 	}
 	fmt.Printf("Made %d passes and made %d swaps\nTotal steps taken: %v\n", passes, swaps, totalsteps)
@@ -39,19 +38,14 @@ func BubbleSort2(arr []int) {
 	n := len(arr)
 	for n >= 1 {
 		passes++
-		swapped := false
 		for i := 1; i < n; i++ {
 			totalsteps++
 			if arr[i-1] > arr[i] {
 				arr[i-1], arr[i] = arr[i], arr[i-1]
-				swapped = true
 				swaps++
 			}
 		}
 		n--
-		if !swapped {
-			break
-		}
 	}
 	fmt.Printf("Made %d passes and made %d swaps\nTotal steps taken: %v\n", passes, swaps, totalsteps)
 }
@@ -111,4 +105,15 @@ func main() {
 	fmt.Println("Incoming array for BubbleSort3()", d)
 	BubbleSort3(d)
 	fmt.Println("Result of BubbleSort3()", d, "\n")
+
+	e := copyArray(a)
+	fmt.Println("Incoming array for sort.Ints()", e)
+	sort.Ints(e)
+	fmt.Println("Result of sort.Ints()", e, "\n")
+
+	for i := 0; i < len(b); i++ {
+		if b[i] != e[i] || c[i] != e[i] || d[i] != e[i] {
+			fmt.Println("Comparison with standard library failed")
+		}
+	}
 }
