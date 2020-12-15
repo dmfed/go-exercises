@@ -4,6 +4,8 @@ import (
 	"fmt"
 )
 
+var iterations int = 0
+
 type primes []int
 
 func newPrimes() *primes {
@@ -17,8 +19,9 @@ func (p *primes) next() int {
 	found := false
 	for !found {
 		found = true
-		for _, num := range *p {
-			if n%num == 0 {
+		for x := 2; x * x <= n; x++ {
+			iterations++
+			if n%x == 0 {
 				found = false
 				n++
 				break
@@ -37,4 +40,5 @@ func main() {
 		n := b.next()
 		fmt.Println(n)
 	}
+	fmt.Printf("Second found in %d interations", iterations)
 }
