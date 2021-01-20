@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"math/rand"
-	"time"
 	"sort"
+	"time"
 )
 
 // BubbleSort1 is the most trivial implementation of Bubble Sort
@@ -35,17 +35,40 @@ func BubbleSort2(arr []int) {
 	passes := 0
 	totalsteps := 0
 	swaps := 0
-	n := len(arr)
-	for n >= 1 {
+	end := len(arr)
+	for end > 0 {
 		passes++
-		for i := 1; i < n; i++ {
+		for i := 1; i < end; i++ {
 			totalsteps++
 			if arr[i-1] > arr[i] {
 				arr[i-1], arr[i] = arr[i], arr[i-1]
 				swaps++
 			}
 		}
-		n--
+		end--
+	}
+	fmt.Printf("Made %d passes and made %d swaps\nTotal steps taken: %v\n", passes, swaps, totalsteps)
+}
+
+// BubbleSort2pluscombines techniques from BubbleSort() and BubbleSort2()
+func BubbleSort2plus(arr []int) {
+	passes := 0
+	totalsteps := 0
+	swaps := 0
+	end := len(arr)
+	swapped := true
+	for swapped {
+		swapped = false
+		passes++
+		for i := 1; i < end; i++ {
+			totalsteps++
+			if arr[i-1] > arr[i] {
+				arr[i-1], arr[i] = arr[i], arr[i-1]
+				swapped = true
+				swaps++
+			}
+		}
+		end--
 	}
 	fmt.Printf("Made %d passes and made %d swaps\nTotal steps taken: %v\n", passes, swaps, totalsteps)
 }
@@ -55,19 +78,19 @@ func BubbleSort3(arr []int) {
 	passes := 0
 	swaps := 0
 	totalsteps := 0
-	n := len(arr)
-	for n >= 1 {
+	end := len(arr)
+	for end > 0 {
 		passes++
-		newn := 0
-		for i := 1; i < n; i++ {
+		newend := 0
+		for i := 1; i < end; i++ {
 			totalsteps++
 			if arr[i-1] > arr[i] {
 				arr[i-1], arr[i] = arr[i], arr[i-1]
-				newn = i
+				newend = i
 				swaps++
 			}
 		}
-		n = newn
+		end = newend
 	}
 	fmt.Printf("Made %d passes and made %d swaps\nTotal steps taken: %v\n", passes, swaps, totalsteps)
 }
@@ -101,6 +124,11 @@ func main() {
 	BubbleSort2(c)
 	fmt.Println("Result of BubbleSort2()", c, "\n")
 
+	f := copyArray(a)
+	fmt.Println("Incoming array for BubbleSort2plus()", c)
+	BubbleSort2plus(f)
+	fmt.Println("Result of BubbleSort2plus()", f, "\n")
+
 	d := copyArray(a)
 	fmt.Println("Incoming array for BubbleSort3()", d)
 	BubbleSort3(d)
@@ -112,7 +140,7 @@ func main() {
 	fmt.Println("Result of sort.Ints()", e, "\n")
 
 	for i := 0; i < len(b); i++ {
-		if b[i] != e[i] || c[i] != e[i] || d[i] != e[i] {
+		if b[i] != e[i] || c[i] != e[i] || d[i] != e[i] || f[i] != e[i] {
 			fmt.Println("Comparison with standard library failed")
 		}
 	}
