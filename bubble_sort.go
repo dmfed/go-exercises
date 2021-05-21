@@ -28,7 +28,7 @@ func BubbleSort1(arr []int) {
 	fmt.Printf("Made %d passes and made %d swaps\nTotal steps taken: %v\n", passes, swaps, totalsteps)
 }
 
-// BubbleSort2 differs in that after each pass in stops
+// BubbleSort2 differs in that after each pass it stops
 // visiting the last cells of array (which are guaranteed
 // to be sorted by the time)
 func BubbleSort2(arr []int) {
