@@ -32,4 +32,6 @@ func main() {
 	n := []int{12, 13, 14, 15, 3, 4, 2, 1}
 	fmt.Println(min_rec(n...))
 	fmt.Println(min_iter(4, 2, 6, 1))
+	fmt.Println(min_iter())
+	fmt.Println(min_iter([]int{-1, 3, -100}...))
 }
